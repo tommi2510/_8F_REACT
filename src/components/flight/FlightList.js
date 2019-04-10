@@ -124,8 +124,8 @@ class FlightList extends Component {
                 <TableCell className={classes.textColor} component="th" scope="row">{flight.departure}</TableCell>
                 <TableCell className={classes.textColor} component="th" scope="row"><FlightTakeOff color="primary" fontSize="large"/></TableCell>
                 <TableCell className={classes.textColor} component="th" scope="row">{flight.arrival}</TableCell>
-                <TableCell component="th" scope="row">{flight.price}kr.</TableCell>
-                <TableCell component="th" scope="row">{flight.seatsAvailable} seats</TableCell>
+                <TableCell className={classes.textColor} component="th" scope="row">{flight.price}kr.</TableCell>
+                <TableCell className={classes.textColor} component="th" scope="row">{flight.seatsAvailable} seats</TableCell>
                 <TableCell className={classes.textColor} component="th" scope="row"><Button variant="contained" color="secondary" className={classes.button}>
                     Book
                 </Button></TableCell>

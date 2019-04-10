@@ -174,7 +174,7 @@ class PassengerForms extends Component {
 
 
 
-        // this.props.history.push(`/users/${id}`);
+        this.props.history.push(`/users/${id}/bookings`);
     }
 
     handleChange(index, event) {
