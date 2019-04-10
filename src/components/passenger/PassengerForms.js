@@ -13,6 +13,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import queryString from "query-string";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from "@material-ui/core/TextField";
 
 
 const styles = theme => ({
@@ -54,6 +57,9 @@ const styles = theme => ({
     },
     label: {
         color: 'black',
+    },
+    numberfield: {
+        width: '15%',
     }
 });
 
@@ -85,6 +91,9 @@ class PassengerForms extends Component {
             passengers.push({
                 firstName: '',
                 lastName: '',
+                priorityB: false,
+                luggage: 0,
+                firstClass: false,
             })
         }
 
@@ -181,12 +190,27 @@ class PassengerForms extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
+        console.log(value, name);
 
-        const { passengers } = this.state;
+        const {passengers} = this.state;
         passengers[index][name] = value;
 
         this.setState({passengers});
     }
+
+        handleChangeCheckbox(index, event) {
+            const target = event.target;
+            const value = target.checked;
+            const name = target.name;
+            console.log(value, name);
+
+            const { passengers } = this.state;
+            passengers[index][name] = value;
+
+            this.setState({passengers});
+            console.log(this.state);
+        }
+
 
     render() {
         const { classes } = this.props;
@@ -213,6 +237,41 @@ class PassengerForms extends Component {
                         onChange={(e) => this.handleChange(index, e)}
                     />
                 </FormControl>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={this.state.passengers[index].priorityB}
+                            onChange={(e) => this.handleChangeCheckbox(index, e)}
+                            name="priorityB"
+                            id="priorityB"
+                        />
+                    }
+                    label="Priority Boarding"
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={this.state.passengers[index].firstClass}
+                            onChange={(e) => this.handleChangeCheckbox(index, e)}
+                            name="firstClass"
+                            id="firstClass"
+                        />
+                    }
+                    label="First Class"
+                />
+                <TextField
+                    id="luggage"
+                    label="Luggage"
+                    value={this.state.passengers[index].luggage}
+                    onChange={(e) => this.handleChange(index, e)}
+                    type="number"
+                    name="luggage"
+                    className={classes.numberfield}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    InputProps={{ inputProps: { min: 0, max: 10 } }}
+                />
             </FormGroup>
         });
 
