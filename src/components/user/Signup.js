@@ -79,8 +79,6 @@ class Signup extends Component {
 
         const body = await result.json();
         const id = body.id;
-        console.log(id)
-        console.log(this.props);
 
         this.props.history.push(`/users/${id}`);
     }

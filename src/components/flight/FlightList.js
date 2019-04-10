@@ -76,12 +76,8 @@ class FlightList extends Component {
     componentDidMount() {
         this.setState({isLoading: true});
 
-        const values = queryString.parse(this.props.location.search);
-        console.log(this.props)
         const location = this.props.location;
-
         const url = `http://localhost:3000/api/flights${location.search}`;
-        console.log("url " + url);
 
         fetch(url)
             .then(response => response.json())
@@ -99,7 +95,6 @@ class FlightList extends Component {
     }
 
     handleClick(id) {
-        console.log(id);
         const location = this.props.location;
 
         this.props.history.push(`${location.pathname}/${id}${location.search}`);
@@ -109,9 +104,10 @@ class FlightList extends Component {
     render() {
         const { classes } = this.props;
         const {flights, isLoading} = this.state;
-        console.log(this.state);
         const { content } = flights;
         const found = content.length > 0;
+        console.log(flights)
+        const showMore = flights.first && flights.last;
 
         if (isLoading) {
             return <Loading />
@@ -163,11 +159,16 @@ class FlightList extends Component {
 
 
                             </Paper>
-                            <div className={classes.moreButtonContainer}>
-                                <Button color="secondary" variant="contained">
-                                    View more
-                                </Button>
-                            </div>
+                            { !showMore ? (
+                                <div className={classes.moreButtonContainer}>
+                                    <Button color="secondary" variant="contained">
+                                        View more
+                                    </Button>
+                                </div>
+                            ) : (
+                                <div></div>
+                            )}
+
 
                         </div>
 

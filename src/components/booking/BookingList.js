@@ -76,27 +76,20 @@ class BookingList extends Component {
         this.setState({isLoading: true});
 
 
-        console.log(this.props)
         const {id} = this.props.match.params;
-        console.log(id);
         const {pathname} = this.props.location;
-        console.log(pathname);
 
         const url = `http://localhost:3000/api/users/${id}/bookings`;
-        console.log("url " + url);
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-
-                console.log(data);
                 this.setState({bookings: data, isLoading: false})
             });
 
     }
 
     handleClick(id) {
-        console.log(id);
         const location = this.props.location;
 
         // this.props.history.push(`${location.pathname}/${id}${location.search}`);
@@ -116,7 +109,6 @@ class BookingList extends Component {
     render() {
         const { classes } = this.props;
         const {bookings, isLoading} = this.state;
-        console.log(this.state);
         const { content } = bookings;
         const found = content.length > 0;
 

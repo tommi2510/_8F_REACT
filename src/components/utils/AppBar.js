@@ -74,7 +74,7 @@ class PrimarySearchAppBar extends React.Component {
         mobileMoreAnchorEl: null,
     };
     componentDidMount() {
-        console.log(this.props)
+
     }
 
 
@@ -146,7 +146,6 @@ class PrimarySearchAppBar extends React.Component {
                 </MenuItem>
             </Menu>
         );
-        console.log(this.props);
         return (
             <div className={classes.root}>
                 <AppBar position="static" color="primary">

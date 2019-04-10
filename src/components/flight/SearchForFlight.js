@@ -70,8 +70,8 @@ const styles = theme => ({
 class SearchForFlight extends Component {
 
     emptyItem = {
-        departure: 'Keflavík',
-        arrival: 'Vestmannaeyjar',
+        departure: '',
+        arrival: '',
         scheduledTime: new Date('2019-04-12T00:00:00'),
         passenger: 1,
         allFlights: false,
@@ -83,14 +83,12 @@ class SearchForFlight extends Component {
     }
 
     async componentDidMount() {
-        console.log(this.props.location.search)
     }
 
 
     handleSubmit = async (event) => {
         event.preventDefault();
         const currentState = this.state;
-        console.log(this.props)
         const { pathname } = this.props.location;
 
         const { scheduledTime, allFlights, departure, arrival, ...rest } = this.state;
@@ -103,16 +101,13 @@ class SearchForFlight extends Component {
             finalOb = rest;
         }
 
-        console.log(finalOb)
 
         const stringified = queryString.stringify(finalOb);
-        console.log(stringified);
 
         // TODO: Validation
 
 
         const searchString = `${pathname}/flights?${stringified}`;
-        console.log(searchString)
         this.props.history.push(searchString);
 
     }
@@ -124,20 +119,16 @@ class SearchForFlight extends Component {
         const prevState = {...this.state};
         prevState[name] = value;
         this.setState(prevState);
-        console.log(this.state)
     }
 
     handleDateChange = date => {
-        console.log(date);
         this.setState({ scheduledTime: date });
     };
 
     handleCheckBoxChange= event => {
         const target = event.target;
         const value = target.checked;
-        console.log(value)
         const name = target.name;
-        console.log(name)
 
         this.setState({
             [name]: value,
@@ -173,6 +164,9 @@ class SearchForFlight extends Component {
                                             id: 'departure',
                                         }}
                                     >
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
                                         <MenuItem value="Keflavík">Keflavík</MenuItem>
                                         <MenuItem value="Reykjavík">Reykjavík</MenuItem>
                                         <MenuItem value="Akureyri">Akureyri</MenuItem>
@@ -194,7 +188,9 @@ class SearchForFlight extends Component {
                                             id: 'arrival',
                                         }}
                                     >
-
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
                                         <MenuItem value="Keflavík">Keflavík</MenuItem>
                                         <MenuItem value="Reykjavík">Reykjavík</MenuItem>
                                         <MenuItem value="Akureyri">Akureyri</MenuItem>

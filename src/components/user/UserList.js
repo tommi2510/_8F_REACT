@@ -61,7 +61,7 @@ class UserList extends Component {
     }
 
     newUser = () => {
-        this.props.history.push(`/newUser`);
+        this.props.history.push(`/`);
     }
 
 
