@@ -87,7 +87,17 @@ class BookingList extends Component {
 
         fetch(url)
             .then(response => response.json())
-            .then(data => this.setState({bookings: data, isLoading: false}));
+            .then(data => {
+                console.log(data);
+                this.setState({bookings: data, isLoading: false})
+            });
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                this.setState({bookings: data, isLoading: false})
+            });
     }
 
 
