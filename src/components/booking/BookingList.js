@@ -93,7 +93,7 @@ class BookingList extends Component {
                 this.setState({bookings: data, isLoading: false})
             });
 
-    }   
+    }
 
     handleClick(id) {
         console.log(id);
@@ -126,12 +126,15 @@ class BookingList extends Component {
 
         const bookingList = content.map(booking => {
             return <TableRow hover key={booking.id} className={classes.rowSpacing} onClick={() => this.handleClick(booking.id)}>
-                <TableCell className={classes.important} component="th" scope="row">{booking.id}</TableCell>
+                <TableCell className={classes.textColor} component="th" scope="row">{booking.passengers[0].firstName}</TableCell>
+                <TableCell className={classes.textColor} component="th" scope="row">{booking.passengers[0].lastName}</TableCell>
                 <TableCell className={classes.important} component="th" scope="row">{this.formatDate(booking.flight.scheduledTime)}</TableCell>
                 <TableCell className={classes.important} component="th" scope="row">{this.formatTime(booking.flight.scheduledTime)}</TableCell>
-                <TableCell className={classes.textColor} component="th" scope="row">{booking.flight.departure}</TableCell>
+                <TableCell className={classes.important} component="th" scope="row">{booking.flight.departure}</TableCell>
                 {/*<TableCell className={classes.textColor} component="th" scope="row"><BookingTakeOff color="primary" fontSize="large"/></TableCell>*/}
-                <TableCell className={classes.textColor} component="th" scope="row">{booking.flight.arrival}</TableCell>
+                <TableCell className={classes.important} component="th" scope="row">{booking.flight.arrival}</TableCell>
+                <TableCell className={classes.textColor} component="th" scope="row">{booking.flight.flightNo}</TableCell>
+                <TableCell className={classes.textColor} component="th" scope="row">{booking.flight.price}</TableCell>
             </TableRow>
         });
 
@@ -146,11 +149,14 @@ class BookingList extends Component {
                                 <Table className={classes.table}>
                                     <TableHead>
                                         <TableRow>
+                                            <TableCell className={classes.noBorder}>First Name</TableCell>
+                                            <TableCell className={classes.noBorder}>Last Name</TableCell>
                                             <TableCell className={classes.noBorder}>Date</TableCell>
                                             <TableCell className={classes.noBorder}>Time</TableCell>
-                                            <TableCell className={classes.noBorder}>Source</TableCell>
-                                            <TableCell className={classes.noBorder}></TableCell>
+                                            <TableCell className={classes.noBorder}>Departure</TableCell>
                                             <TableCell className={classes.noBorder}>Destination</TableCell>
+                                            <TableCell className={classes.noBorder}>Flight no.</TableCell>
+                                            <TableCell className={classes.noBorder}>Price (ISK)</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -163,11 +169,6 @@ class BookingList extends Component {
 
 
                             </Paper>
-                            <div className={classes.moreButtonContainer}>
-                                <Button color="secondary" variant="contained">
-                                    View more
-                                </Button>
-                            </div>
 
                         </div>
 
