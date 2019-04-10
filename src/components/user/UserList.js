@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Grid, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core';
-import Appbar from '../Appbar';
+import { Grid, Table, TableBody, TableCell, TableHead, TableRow, Paper, Fab } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Header from './Header';
+import Header from '../utils/Header';
+import Loading from '../utils/Loading';
+import Signup from './Signup';
+import AddIcon from '@material-ui/icons/Add';
+
 
 const styles = theme => ({
     root: {
@@ -27,7 +30,12 @@ const styles = theme => ({
     hover: {
         backgroundColor: 'white',
         cursor: 'pointer',
-    }
+    },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing.unit * 4,
+        right: theme.spacing.unit * 4,
+    },
 });
 
 class UserList extends Component {
@@ -51,13 +59,17 @@ class UserList extends Component {
         this.props.history.push(`/users/${id}`);
     }
 
+    newUser = () => {
+        this.props.history.push(`/newUser`);
+    }
+
 
     render() {
         const { classes } = this.props;
         const {users, isLoading} = this.state;
 
         if (isLoading) {
-            return <p>Loading...</p>;
+            return <Loading />
         }
 
         const userList = users.map(user => {
@@ -69,26 +81,34 @@ class UserList extends Component {
             </TableRow>
         });
 
+        const userExist = users.length > 0;
+
         return (
             <div>
-                <Appbar/>
-                <Grid className={classes.container}>
-                    <Header header="Users" />
-                    <Paper className={classes.paper}>
-                        <Table className={classes.table}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="center">First Name</TableCell>
-                                    <TableCell align="center">Last Name</TableCell>
-                                    <TableCell align="center">Email</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {userList}
-                            </TableBody>
-                        </Table>
-                    </Paper>
-                </Grid>
+                {userExist ? (
+                    <Grid className={classes.container}>
+                        <Header header="Users" />
+                        <Paper className={classes.paper}>
+                            <Table className={classes.table}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="center">First Name</TableCell>
+                                        <TableCell align="center">Last Name</TableCell>
+                                        <TableCell align="center">Email</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {userList}
+                                </TableBody>
+                            </Table>
+                        </Paper>
+                        <Fab className={classes.fab} color="secondary" onClick={this.newUser}>
+                            <AddIcon />
+                        </Fab>
+                    </Grid>
+                ) : (
+                    <Signup />
+                )}
             </div>
         );
     }

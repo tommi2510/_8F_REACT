@@ -80,6 +80,7 @@ class Signup extends Component {
         const body = await result.json();
         const id = body.id;
         console.log(id)
+        console.log(this.props);
 
         this.props.history.push(`/users/${id}`);
     }
@@ -106,7 +107,7 @@ class Signup extends Component {
                         Create a User
                     </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
-                        <FormControl margin="normal" required fullWidth>
+                        <FormControl margin="normal" fullWidth>
                             <InputLabel htmlFor="firstName">First Name</InputLabel>
                             <Input
                                 name="firstName"
@@ -115,7 +116,7 @@ class Signup extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormControl>
-                        <FormControl margin="normal" required fullWidth>
+                        <FormControl margin="normal" fullWidth>
                             <InputLabel htmlFor="lastName">Last Name</InputLabel>
                             <Input
                                 name="lastName"
@@ -124,7 +125,7 @@ class Signup extends Component {
                                 onChange={this.handleChange}
                             />
                         </FormControl>
-                        <FormControl margin="normal" required fullWidth>
+                        <FormControl margin="normal" fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>
                             <Input
                                 id="email"
