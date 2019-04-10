@@ -80,7 +80,6 @@ class PassengerForms extends Component {
         const { params } = match;
         const { search } = location;
         const { id, flightId } = params;
-        console.log(this.props);
 
         const queryRes = queryString.parse(search);
 
@@ -111,41 +110,11 @@ class PassengerForms extends Component {
         const { params } = match;
         const { id, flightId } = params;
 
-        const booking = {
-            user: {
-                id,
-            },
-            flight: {
-                id: flightId,
-            }
-        };
-
-        // create booking
-        const result = await fetch('/api/booking', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(booking),
-        });
-
-        const body = await result.json();
-        console.log(body);
-        const bookingId = body.id;
-        console.log(bookingId)
-
-        const bookingIdOb = {
-            booking:{
-                id: bookingId,
-            }
-        };
-
 
         const promises = [];
 
         passengers.forEach((passenger) => {
-            const passengerOb = { ...bookingIdOb, ...passenger };
+            const passengerOb = { ...passenger };
             promises.push(
                 fetch('/api/passenger', {
                     method: 'POST',
@@ -159,28 +128,36 @@ class PassengerForms extends Component {
         });
 
         const finalRes = await Promise.all(promises);
-        console.log(finalRes);
 
-        // decrement seatsAvailable
+        const newArr = [];
+
+        for (let i = 0; i < finalRes.length; i++) {
+            newArr.push(finalRes[i].json());
+        }
 
 
+        const passengerRes = await Promise.all(newArr);
 
+        const booking = {
+            user: {
+                id,
+            },
+            flight: {
+                id: flightId,
+            },
+            passengers: passengerRes,
 
-        // // create passengers
-        // const passengerResult = await fetch('/api/passenger', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(passengerOb),
-        // });
-        //
-        // const body1 = await passengerResult.json();
-        // console.log(body1);
-        // const passengerId = body1.id;
-        // console.log(passengerId)
+        };
 
+        // create booking
+        const result = await fetch('/api/booking', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(booking),
+        });
 
 
         this.props.history.push(`/users/${id}/bookings`);
@@ -190,7 +167,6 @@ class PassengerForms extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log(value, name);
 
         const {passengers} = this.state;
         passengers[index][name] = value;
@@ -202,13 +178,11 @@ class PassengerForms extends Component {
             const target = event.target;
             const value = target.checked;
             const name = target.name;
-            console.log(value, name);
 
             const { passengers } = this.state;
             passengers[index][name] = value;
 
             this.setState({passengers});
-            console.log(this.state);
         }
 
 

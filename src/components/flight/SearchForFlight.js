@@ -173,9 +173,6 @@ class SearchForFlight extends Component {
                                             id: 'departure',
                                         }}
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
                                         <MenuItem value="Keflavík">Keflavík</MenuItem>
                                         <MenuItem value="Reykjavík">Reykjavík</MenuItem>
                                         <MenuItem value="Akureyri">Akureyri</MenuItem>
