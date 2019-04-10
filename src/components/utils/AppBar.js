@@ -159,11 +159,11 @@ class PrimarySearchAppBar extends React.Component {
                         </Typography>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
-                            <Link className={classes.links} component={RouterLink} to="/" color="inherit">
+                            <Link className={classes.links} component={RouterLink} to="/users" color="inherit">
                                 Users
                             </Link>
                             <Link className={classes.links} component={RouterLink} to={`/flights}`} color="inherit">
-                                Flights
+                                Bookings
                             </Link>
                             <IconButton
                                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}

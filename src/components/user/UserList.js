@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import { Grid, Table, TableBody, TableCell, TableHead, TableRow, Paper, Fab } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -107,7 +108,8 @@ class UserList extends Component {
                         </Fab>
                     </Grid>
                 ) : (
-                    <Signup />
+
+                    <h1>No users.</h1>
                 )}
             </div>
         );

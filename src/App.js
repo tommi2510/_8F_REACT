@@ -47,8 +47,9 @@ class App extends Component {
                 <CssBaseline />
                 <Router>
                     <Switch>
-                        <Route path='/' exact={true} component={UserList}/>
-                        <Route path='/newUser' exact={true} component={Signup}/>
+                        <Route path='/' exact={true} component={Signup}
+                        />
+                        <Route path='/users' exact={true} component={UserList}/>
                         <Route path='/users/:id' exact={true} component={SearchForFlight}/>
                         <Route path='/users/:id/flights' exact={true} component={FlightList}/>
                         <Route path='/users/:id/bookings' exact={true} component={BookingList}/>

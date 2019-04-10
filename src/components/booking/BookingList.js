@@ -77,9 +77,9 @@ class BookingList extends Component {
 
 
         console.log(this.props)
-        const { id } = this.props.match.params;
+        const {id} = this.props.match.params;
         console.log(id);
-        const { pathname } = this.props.location;
+        const {pathname} = this.props.location;
         console.log(pathname);
 
         const url = `http://localhost:3000/api/users/${id}/bookings`;
@@ -88,18 +88,12 @@ class BookingList extends Component {
         fetch(url)
             .then(response => response.json())
             .then(data => {
+
                 console.log(data);
                 this.setState({bookings: data, isLoading: false})
             });
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.setState({bookings: data, isLoading: false})
-            });
-    }
-
+    }   
 
     handleClick(id) {
         console.log(id);
