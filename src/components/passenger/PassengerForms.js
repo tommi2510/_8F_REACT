@@ -137,6 +137,7 @@ class PassengerForms extends Component {
 
 
         const passengerRes = await Promise.all(newArr);
+        console.log(passengerRes);
 
         const booking = {
             user: {
